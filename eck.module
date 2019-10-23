@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * get eck by id
+ */
+function get_eck_byid($etid) {
+    $et = db_select('entity_type', 'et')
+      ->fields('et')
+      ->condition('et.etid', $etid)
+      ->execute()
+      ->fetchObject();
+
+    return $et;
+}
+
+/**
+ * get all eck.
+ */
+function get_all_eck($parms) {
+    $data = array();
+    $query = db_select('entity_type', 'et')
+      ->fields('et')
+      ->extend('Pager')->size(20)->page($parms['page']);
+
+    $data['pager'] = $query->fetchPager();
+    $data['list'] = $query->execute()->fetchAll();
+
+    return $data;
+}
+
+/**
+ * get eck name by machine_name
+ */
+function get_eck_name_bymachine_name($machine_name) {
+    $name = db_select('entity_type', 'et')
+      ->fields('et', array('name'))
+      ->condition('et.machine_name', $machine_name)
+      ->execute()
+      ->fetchField();
+
+    return $name;
+}
+
+/**
+ * get eck machine_name by id
+ */
+function get_eck_machine_name_byid($etid) {
+    $machine_name = db_select('entity_type', 'et')
+      ->fields('et', array('machine_name'))
+      ->condition('et.etid', $etid)
+      ->execute()
+      ->fetchField();
+
+    return $machine_name;
+}
+
+/**
+ * get all entity type.
+ */
+function get_all_entity() {
+    $result = db_select('entity_type', 'et')
+      ->fields('et')
+      ->execute()
+      ->fetchAll();
+
+    if(!empty($result)) {
+      foreach ($result as $key => $value) {
+        $result[$key]->fields_config = json_decode($value->fields_config);
+      }
+    }
+
+    return $result;
+}
+
+/**
+ * get eck fields by machine_name
+ */
+function get_eck_fields_bymachine_name($machine_name) {
+    $et = db_select('entity_type', 'et')
+      ->fields('et')
+      ->condition('et.machine_name', $machine_name)
+      ->execute()
+      ->fetchObject();
+
+    if(!empty($et)) {
+      return json_decode($et->fields_config);
+    }
+
+    return array();
+}
+
+/**
+ * get eck base fields by machine_name
+ */
+function get_eck_base_fields_bymachine_name($machine_name) {
+    $et = db_select('entity_type', 'et')
+      ->fields('et')
+      ->condition('et.machine_name', $machine_name)
+      ->execute()
+      ->fetchObject();
+
+    if(!empty($et) && !empty($et->base_field)) {
+      return explode('|', $et->base_field);
+    }
+
+    return array();
+}
+
+/**
+ * get entity content.
+ */
+function get_eck_content($machine_name) {
+    $result = db_select($machine_name, 'c')
+      ->fields('c')
+      ->execute()
+      ->fetchAll();
+
+    return $result;
+}
+
+/**
+ * get entity content.
+ */
+function get_eck_content_byid($machine_name, $entity_content_id) {
+    $result = db_select($machine_name, 'c')
+      ->fields('c')
+      ->condition('c.'.substr($machine_name, 0, 1 ).'id', $entity_content_id)
+      ->execute()
+      ->fetchObject();
+
+    return $result;
+}
+
+/**
+ * get all contents.
+ */
+function get_all_contents() {
+    $contents = entity_load_many('page', array());
+    $entitys = get_all_entity();
+
+    if(!empty($entitys)) {
+      foreach ($entitys as $et) {
+        $contents = array_merge($contents, entity_load_many($et->machine_name, array()));
+      }
+    }
+
+    return $contents;
+}

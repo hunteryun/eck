@@ -1,0 +1,56 @@
+<?php
+/**
+ * @file
+ * eck database info.
+ */
+
+function eck_schema() {
+  $schema['entity_type'] = array(
+    'description' => 'Stores entity_type data.',
+    'fields' => array(
+      'etid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'ID of entity type.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => 1,
+        'default' => '',
+        'description' => 'entity type name.',
+      ),
+      'machine_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => 1,
+        'default' => '',
+        'description' => 'entity type machine name.',
+      ),
+      'base_field' => array(
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'entity type base_field.',
+      ),
+      'fields_config' => array(
+        'type' => 'blob',
+        'not null' => 1,
+        'size' => 'big',
+        'description' => 'entity type fields config.',
+      ),
+    ),
+    'primary key' => array('etid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Insert init page.
+ */
+function eck_install() {
+
+}

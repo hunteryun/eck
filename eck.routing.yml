@@ -1,0 +1,103 @@
+eck.eck_list:
+  path: '/admin/eck'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_list'
+    _title: 'Entity类型'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_add:
+  path: '/admin/eck/add'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_add'
+    _title: '创建Entity类型'
+  requirements:
+    _permission: ['csrf_check', 'access admin page']
+
+eck.eck_edit:
+  path: '/admin/eck/edit/{etid}'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_edit'
+    _title: '编辑Entity类型'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_update:
+  path: '/admin/eck/update'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_update'
+    _title: 'eck update'
+  requirements:
+    _permission: ['csrf_check', 'access admin page']
+
+eck.eck_del:
+  path: '/admin/eck/del/{etid}'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_del'
+    _title: 'eck del'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_fields:
+  path: '/admin/eck/{machine_name}/fields'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_fields'
+    _title: '管理字段'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_field_add:
+  path: '/admin/eck/{machine_name}/field/add'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_field_add'
+    _title: '添加字段'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_field_edit:
+  path: '/admin/eck/{machine_name}/field/edit/{field_machine_name}'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_field_edit'
+    _title: '修改字段'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_field_del:
+  path: '/admin/eck/{machine_name}/field/del/{field_machine_name}'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_field_del'
+    _title: '删除字段'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_content:
+  path: '/admin/eck/{machine_name}/content'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_content'
+    _title: '管理内容'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_content_add:
+  path: '/admin/eck/{machine_name}/content/add'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_content_add'
+    _title: '添加内容'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_content_edit:
+  path: '/admin/eck/{machine_name}/content/edit/{entity_content_id}'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_content_edit'
+    _title: '编辑内容'
+  requirements:
+    _permission: 'access admin page'
+
+eck.eck_content_del:
+  path: '/admin/eck/{machine_name}/content/del/{entity_content_id}'
+  defaults:
+    _controller: '\Hunter\eck\Controller\EckController::eck_content_del'
+    _title: '删除内容'
+  requirements:
+    _permission: 'access admin page'

@@ -1,0 +1,5 @@
+name: Entity Construction Kit
+type: module
+description: ECK (Entity Construction Kit) allows users to create and administer entity types and entities from UI.
+core: 1.x
+package: Hunter
